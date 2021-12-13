@@ -45,6 +45,16 @@ namespace Services.Users
 
             var createdUser = await _managementApiClient.Users.CreateAsync(auth0Request);
 
+            // Caching might be nice here
+            var allRoles = await _managementApiClient.Roles.GetAllAsync(new GetRolesRequest());
+            var adminRole = allRoles.First(x => x.Name == "Administrator");
+
+            var assignRoleRequest = new AssignRolesRequest
+            {
+                Roles = new string[] { adminRole.Id }
+            };
+            await _managementApiClient.Users.AssignRolesAsync(createdUser?.UserId, assignRoleRequest);
+
             response.Auth0UserId = createdUser.UserId;
 
             return response;
