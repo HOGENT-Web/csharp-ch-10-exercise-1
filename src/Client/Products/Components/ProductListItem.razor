@@ -13,7 +13,7 @@
     </div>
     <footer class="card-footer">
         <a @onclick="AddToCart" class="card-footer-item">Bestel</a>
-        <AuthorizeView Roles="@Roles.Administrator">
+        <AuthorizeView Roles="Administrator,Secretary">
             <a @onclick="OpenEditForm" class="card-footer-item">Wijzigen</a>
         </AuthorizeView>
     </footer>

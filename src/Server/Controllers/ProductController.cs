@@ -32,6 +32,7 @@ namespace Server.Controllers
             return productService.GetDetailAsync(request);
         }
 
+        [Authorize(Roles = "Administrator,Secretary")]
         [HttpDelete("{ProductId}")]
         public Task DeleteAsync([FromRoute] ProductRequest.Delete request)
         {

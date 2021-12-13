@@ -2,7 +2,6 @@ using Append.Blazor.Sidepanel;
 using Client.Infrastructure;
 using Client.Ordering;
 using Client.Products;
-using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -32,7 +31,8 @@ namespace Client
                 builder.Configuration.Bind("Auth0", options.ProviderOptions);
                 options.ProviderOptions.ResponseType = "code";
                 options.ProviderOptions.AdditionalProviderParameters.Add("audience", builder.Configuration["Auth0:Audience"]);
-            });
+            }).AddAccountClaimsPrincipalFactory<ArrayClaimsPrincipalFactory<RemoteUserAccount>>();
+
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddSidepanel();
             builder.Services.AddHttpClient<StorageService>();

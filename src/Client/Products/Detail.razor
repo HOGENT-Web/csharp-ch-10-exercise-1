@@ -30,10 +30,8 @@ else
                     </span>
                     <span>Bestellen</span>
                 </button>
-                <AuthorizeView Roles="@Roles.Administrator">
-
-                    @if (isRequestingDelete)
-                    {
+                @if (isRequestingDelete)
+                {
                         <button class="button is-danger is-medium is-fullwidth" @onclick="DeleteProductAsync">
                             <span class="icon">
                                 <i class="fas fa-trash"></i>
@@ -46,24 +44,26 @@ else
                             </span>
                             <span>Verwijderen annuleren</span>
                         </button>
-                    }
-                    else
-                    {
+                }
+                else
+                {
+                    <AuthorizeView Roles="Administrator,Secretary">
                         <button class="button is-light is-medium is-fullwidth" @onclick="OpenEditForm">
                             <span class="icon">
                                 <i class="fas fa-edit"></i>
                             </span>
                             <span>Wijzigen</span>
                         </button>
+                    </AuthorizeView>
+                    <AuthorizeView Roles="@Roles.Administrator">
                         <button class="button is-light is-medium is-fullwidth" @onclick="RequestDelete">
                             <span class="icon">
                                 <i class="fas fa-trash"></i>
                             </span>
                             <span>Verwijderen</span>
                         </button>
-                    }
-
-                </AuthorizeView>
+                    </AuthorizeView>
+                }
             </div>
         </div>
 

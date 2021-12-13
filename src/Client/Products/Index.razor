@@ -7,7 +7,7 @@
 {
     <div class="columns">
     <div class="column is-one-quarter">
-        <AuthorizeView Roles="@Roles.Administrator">
+        <AuthorizeView Roles="Administrator,Secretary">
             <div class="buttons">
                 <button class="button is-primary is-fullwidth" @onclick="OpenCreateForm">
                     <span class="icon">
