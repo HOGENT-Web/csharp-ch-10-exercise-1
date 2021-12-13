@@ -1,27 +1,26 @@
-﻿@using Microsoft.AspNetCore.Components.Authorization
+﻿@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
 @inject NavigationManager Navigation
+@inject SignOutSessionStateManager SignOutManager
 
 <AuthorizeView>
     <Authorized>
+        <button class="button is-ghost">@context.User.Identity.Name</button>
         <button class="button is-light" @onclick="BeginSignOut">
             <strong>Uitloggen</strong>
         </button>
     </Authorized>
     <NotAuthorized>
-        <a class="button is-primary" @onclick="BeginSignIn">
+        <a class="button is-primary" href="authentication/login">
             <strong>Inloggen</strong>
         </a>
     </NotAuthorized>
 </AuthorizeView>
 
 @code {
-    private Task BeginSignOut(MouseEventArgs args)
+    private async Task BeginSignOut(MouseEventArgs args)
     {
-        throw new NotImplementedException("Logout is currently not supported.");
-    }
-    private Task BeginSignIn(MouseEventArgs args)
-    {
-        throw new NotImplementedException("Login is currently not supported.");
+        await SignOutManager.SetSignOutState();
+        Navigation.NavigateTo("authentication/logout");
     }
 }

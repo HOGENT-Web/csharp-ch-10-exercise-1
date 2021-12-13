@@ -11,6 +11,7 @@ using Services.Common;
 using Services.Products;
 using Shared.Products;
 using System.Data.SqlClient;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Server
 {
@@ -40,6 +41,17 @@ namespace Server
                 c.CustomSchemaIds(x => $"{x.DeclaringType.Name}.{x.Name}");
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sportstore API", Version = "v1" });
             });
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = Configuration["Auth0:Authority"];
+                options.Audience = Configuration["Auth0:ApiIdentifier"];
+            });
+
             services.AddRazorPages();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IStorageService, BlobStorageService>();
@@ -72,6 +84,7 @@ namespace Server
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

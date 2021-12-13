@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Shared.Products;
 using System.Threading.Tasks;
 
 namespace Server.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     [ApiController]
     [Route("api/[controller]")]
     public class ProductController : ControllerBase
@@ -16,12 +18,14 @@ namespace Server.Controllers
         }
 
 
+        [AllowAnonymous]
         [HttpGet]
         public Task<ProductResponse.GetIndex> GetIndexAsync([FromQuery] ProductRequest.GetIndex request)
         {
             return productService.GetIndexAsync(request);
         }
 
+        [AllowAnonymous]
         [HttpGet("{ProductId}")]
         public Task<ProductResponse.GetDetail> GetDetailAsync([FromRoute] ProductRequest.GetDetail request)
         {
