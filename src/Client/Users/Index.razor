@@ -1,0 +1,29 @@
+﻿@page "/user"
+@attribute [Authorize(Roles = "Administrator")]
+
+@if (users is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+        <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in users)
+            {
+                <tr>
+                    <td>@user.Firstname</td>
+                    <td>@user.Lastname</td>
+                    <td>@user.Email</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

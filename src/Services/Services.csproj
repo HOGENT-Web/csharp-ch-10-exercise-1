@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Storage.Blobs" Version="12.10.0" />
+	<PackageReference Include="Auth0Net.DependencyInjection" Version="1.5.0" />
+	<PackageReference Include="Azure.Storage.Blobs" Version="12.10.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
   </ItemGroup>
 

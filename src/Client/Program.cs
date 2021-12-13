@@ -2,11 +2,13 @@ using Append.Blazor.Sidepanel;
 using Client.Infrastructure;
 using Client.Ordering;
 using Client.Products;
+using Client.Users;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shared.Products;
+using Shared.Users;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -34,6 +36,7 @@ namespace Client
             }).AddAccountClaimsPrincipalFactory<ArrayClaimsPrincipalFactory<RemoteUserAccount>>();
 
             builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddSidepanel();
             builder.Services.AddHttpClient<StorageService>();
             builder.Services.AddScoped<Cart>();

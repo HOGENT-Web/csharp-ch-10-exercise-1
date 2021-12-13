@@ -12,6 +12,8 @@ using Services.Products;
 using Shared.Products;
 using System.Data.SqlClient;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Services.Users;
+using Shared.Users;
 
 namespace Server
 {
@@ -52,7 +54,17 @@ namespace Server
                 options.Audience = Configuration["Auth0:ApiIdentifier"];
             });
 
+            services.AddAuth0AuthenticationClient(config =>
+            {
+                config.Domain = Configuration["Auth0:Authority"];
+                config.ClientId = Configuration["Auth0:ClientId"];
+                config.ClientSecret = Configuration["Auth0:ClientSecret"];
+            });
+
+            services.AddAuth0ManagementClient().AddManagementAccessToken();
+
             services.AddRazorPages();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IStorageService, BlobStorageService>();
             services.AddScoped<SportStoreDataInitializer>();
