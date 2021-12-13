@@ -8,5 +8,10 @@ namespace Shared.Users
         {
             public List<UserDto.Index> Users { get; set; } = new();
         }
+
+        public class Create
+        {
+            public string Auth0UserId { get; set; }
+        }
     }
 }

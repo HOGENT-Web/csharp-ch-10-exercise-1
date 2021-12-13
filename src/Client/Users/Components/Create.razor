@@ -1,0 +1,38 @@
+﻿<EditForm Model="@user" OnValidSubmit="@CreateUserAsync">
+    <FluentValidationValidator />
+    <ValidationSummary />
+
+    <div class="field">
+        <label class="label">Voornaam</label>
+        <div class="control">
+            <InputText class="input" @bind-Value="user.Firstname" />
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label">Achternaam</label>
+        <div class="control">
+            <InputText class="input" @bind-Value="user.Lastname" />
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+            <InputText type="email" class="input" @bind-Value="user.Email" />
+        </div>
+    </div>
+
+        <div class="field">
+        <label class="label">Paswoord</label>
+        <div class="control">
+            <InputText type="password" class="input" @bind-Value="user.Password" />
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button class="button is-link is-fullwidth" type="submit">Toevoegen</button>
+        <a href="/" class="button is-link is-light is-fullwidth">Annuleren</a>
+    </div>
+
+</EditForm>

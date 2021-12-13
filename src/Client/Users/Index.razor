@@ -1,6 +1,19 @@
 ﻿@page "/user"
 @attribute [Authorize(Roles = "Administrator")]
 
+<div class="is-flex is-flex-direction-row-reverse mb-1">
+    <AuthorizeView Roles="Administrator">
+        <div class="buttons">
+            <button class="button is-primary is-fullwidth" @onclick="OpenCreateForm">
+                <span class="icon">
+                    <i class="fas fa-plus"></i>
+                </span>
+                <span>Toevoegen</span>
+            </button>
+        </div>
+    </AuthorizeView>
+</div>
+
 @if (users is null)
 {
     <p>Loading...</p>

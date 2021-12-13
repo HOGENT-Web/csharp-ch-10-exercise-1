@@ -22,5 +22,11 @@ namespace Server.Controllers
         {
             return userService.GetIndexAsync(request);
         }
+
+        [HttpPost]
+        public Task<UserResponse.Create> CreateAsync([FromBody] UserRequest.Create request)
+        {
+            return userService.CreateAsync(request);
+        }
     }
 }

@@ -15,6 +15,7 @@ namespace Services.Users
         {
             _managementApiClient = managementApiClient;
         }
+
         public async Task<UserResponse.GetIndex> GetIndexAsync(UserRequest.GetIndex request)
         {
             UserResponse.GetIndex response = new();
@@ -27,6 +28,27 @@ namespace Services.Users
             }).ToList();
 
             return response;
+        }
+
+        public async Task<UserResponse.Create> CreateAsync(UserRequest.Create request)
+        {
+            UserResponse.Create response = new();
+
+            var auth0Request = new UserCreateRequest
+            {
+                Email = request.User.Email,
+                FirstName = request.User.Firstname,
+                LastName = request.User.Lastname,
+                Password = request.User.Password,
+                Connection = "Username-Password-Authentication" // Name of the Database connection
+            };
+
+            var createdUser = await _managementApiClient.Users.CreateAsync(auth0Request);
+
+            response.Auth0UserId = createdUser.UserId;
+
+            return response;
+
         }
     }
 }

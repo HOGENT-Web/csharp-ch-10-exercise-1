@@ -22,5 +22,11 @@ namespace Client.Users
             var response = await authenticatedClient.GetFromJsonAsync<UserResponse.GetIndex>($"{endpoint}?{queryParameters}");
             return response;
         }
+
+        public async Task<UserResponse.Create> CreateAsync(UserRequest.Create request)
+        {
+            var response = await authenticatedClient.PostAsJsonAsync(endpoint, request);
+            return await response.Content.ReadFromJsonAsync<UserResponse.Create>();
+        }
     }
 }
